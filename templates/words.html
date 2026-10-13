@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>JLPT 단어장</title>
+  <link rel="stylesheet" href="/static/style.css?v=102"/>
+</head>
+<body style="margin:0; background:#f3f4f8;">
+
+  <button
+    id="prevBtn"
+    style="
+      position: fixed;
+      top: 50%;
+      left: 20px;
+      transform: translateY(-50%);
+      z-index: 9999;
+      width: 84px;
+      height: 52px;
+      border: none;
+      border-radius: 12px;
+      background: #1976d2;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    "
+  >
+    이전
+  </button>
+
+  <button
+    id="nextBtn"
+    style="
+      position: fixed;
+      top: 50%;
+      right: 20px;
+      transform: translateY(-50%);
+      z-index: 9999;
+      width: 84px;
+      height: 52px;
+      border: none;
+      border-radius: 12px;
+      background: #1976d2;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    "
+  >
+    다음
+  </button>
+
+  <div style="width:min(980px, calc(100vw - 220px)); margin:0 auto; padding:16px 0 40px;">
+
+    <button
+      id="backHomeBtn"
+      style="
+        margin: 4px 0 16px;
+        padding: 10px 16px;
+        font-size: 16px;
+        border-radius: 10px;
+        border: 1px solid #bbb;
+        background: white;
+        cursor: pointer;
+      "
+    >
+      ← 돌아가기
+    </button>
+
+    <h1 style="font-size:56px; margin:20px 0 28px;">N1 단어장</h1>
+
+    <div id="wordList"></div>
+
+    <div id="pageInfo" style="text-align:center; margin-top:14px; font-size:14px; color:#555;">
+      1 / 1
+    </div>
+
+  </div>
+
+  <script src="/static/script.js?v=99"></script>
+</body>
+</html>

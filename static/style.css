@@ -1,0 +1,317 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f3f4f8;
+}
+
+.home-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  text-align: center;
+}
+
+.home-title {
+  font-size: 40px;
+  margin-bottom: 10px;
+}
+
+.home-subtitle {
+  font-size: 18px;
+  color: #666;
+  margin-bottom: 30px;
+}
+
+.home-buttons {
+  display: flex;
+  gap: 20px;
+}
+
+.main-button {
+  padding: 12px 20px;
+  font-size: 16px;
+  border-radius: 10px;
+  border: none;
+  background-color: #1976d2;
+  color: white;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.main-button:hover {
+  background-color: #1565c0;
+}
+
+.disabled-button {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+/* words.html */
+.main-layout {
+  min-height: 100vh;
+}
+
+.center-area {
+  width: min(980px, calc(100vw - 220px));
+  margin: 0 auto;
+  padding: 16px 0 40px;
+}
+
+.back-btn {
+  margin: 4px 0 16px;
+  padding: 10px 16px;
+  font-size: 16px;
+  border-radius: 10px;
+  border: 1px solid #bbb;
+  background: white;
+  cursor: pointer;
+}
+
+h1 {
+  font-size: 56px;
+  margin: 20px 0 28px;
+}
+
+.word-card {
+  background: #fff;
+  padding: 22px 26px;
+  margin: 16px 0;
+  border-radius: 22px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+}
+
+.word-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+}
+
+.word-left {
+  display: flex;
+  flex-direction: column;
+}
+
+.yomi {
+  font-size: 18px;
+  color: #777;
+  margin-bottom: 10px;
+}
+
+.kanji {
+  font-size: 44px;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.meaning {
+  min-width: 120px;
+  text-align: right;
+  font-size: 22px;
+  font-weight: 700;
+  color: #222;
+}
+
+
+#pageInfo {
+  text-align: center;
+  margin-top: 14px;
+  font-size: 14px;
+  color: #555;
+}
+
+.loading-text {
+  font-size: 16px;
+  color: #666;
+  text-align: center;
+}
+
+.error-text {
+  color: #c62828;
+  text-align: center;
+}
+
+/* 버튼 기본 스타일 */
+#prevBtn,
+#nextBtn {
+  width: 84px;
+  height: 52px;
+  border-radius: 12px;
+  border: none;
+  background-color: #1976d2;
+  color: white;
+  cursor: pointer;
+  font-size: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+}
+
+#prevBtn:hover,
+#nextBtn:hover {
+  background-color: #1565c0;
+}
+
+/* 핵심: 화면 기준 좌우 가운데 고정 */
+#prevBtn {
+  position: fixed !important;
+  top: 50% !important;
+  left: 20px !important;
+  transform: translateY(-50%) !important;
+  z-index: 9999 !important;
+}
+
+#nextBtn {
+  position: fixed !important;
+  top: 50% !important;
+  right: 20px !important;
+  transform: translateY(-50%) !important;
+  z-index: 9999 !important;
+}
+
+.yomi,
+.meaning{
+	 cursor:pointer;
+	 transition:opacity 0.2s ease;
+  }
+.hidden-text{
+	opacity : 0.1;
+  }
+
+
+
+
+.quiz-container {
+  max-width: 700px;
+  margin: 60px auto;
+  padding: 24px;
+  text-align: center;
+}
+
+.quiz-progress {
+  margin-bottom: 20px;
+  font-size: 16px;
+  opacity: 0.7;
+}
+
+.question-card {
+  padding: 30px;
+  margin-bottom: 24px;
+  border-radius: 18px;
+  background: #f7f7f7;
+}
+
+.question-label {
+  font-size: 18px;
+  margin-bottom: 12px;
+}
+
+.question-word {
+  font-size: 48px;
+  margin: 0;
+}
+
+.options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-top: 20px;
+}
+
+.option-btn {
+  padding: 18px;
+  font-size: 20px;
+  border: 1px solid #ddd;
+  border-radius: 14px;
+  background: white;
+  cursor: pointer;
+}
+
+.option-btn:hover {
+  background: #f0f0f0;
+}
+
+.option-btn.correct {
+  background: #d8f5d0;
+  border-color: #4caf50;
+}
+
+.option-btn.wrong {
+  background: #ffd6d6;
+  border-color: #f44336;
+}
+
+.option-btn:disabled {
+  cursor: default;
+}
+
+.result-message {
+  margin-top: 20px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.next-btn,
+.menu-btn {
+  display: inline-block;
+  margin-top: 24px;
+  padding: 12px 20px;
+  border-radius: 12px;
+  border: none;
+  background: #222;
+  color: white;
+  text-decoration: none;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+@media (max-width: 700px) {
+  .options {
+    grid-template-columns: 1fr;
+  }
+
+  .question-word {
+    font-size: 38px;
+  }
+}
+
+@media (max-width: 700px) {
+  .center-area {
+    width: calc(100vw - 24px);
+  }
+
+  h1 {
+    font-size: 36px;
+  }
+
+  .word-card {
+    padding: 18px 18px;
+    border-radius: 18px;
+  }
+
+  .word-inner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .kanji {
+    font-size: 34px;
+  }
+
+  .meaning {
+    min-width: auto;
+    text-align: left;
+    font-size: 18px;
+    margin-top: 10px;
+  }
+
+  #prevBtn,
+  #nextBtn {
+    position: static !important;
+    transform: none !important;
+    margin: 10px 6px;
+  }
+
+
+}

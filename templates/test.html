@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>단어 테스트</title>
+  <link rel="stylesheet" href="/static/style.css?v=102">
+</head>
+<body>
+  <div class="quiz-container">
+    <h1>단어 테스트</h1>
+
+    <div id="quiz-box">
+      <div class="quiz-progress" id="progress"></div>
+
+      <div class="question-card">
+        <p class="question-label" id="question-label"></p>
+        <h2 class="question-word" id="question-word"></h2>
+      </div>
+
+      <div class="options" id="options"></div>
+
+      <div class="result-message" id="result-message"></div>
+
+      <button id="next-btn" class="next-btn" onclick="nextQuestion()" style="display:none;">
+        다음 문제
+      </button>
+    </div>
+
+    <div id="final-box" style="display:none;">
+      <h2>테스트 완료</h2>
+      <p id="final-score"></p>
+      <a href="/test" class="menu-btn">다시 풀기</a>
+      <a href="/" class="menu-btn">처음으로</a>
+    </div>
+  </div>
+
+  <script>
+    let questions = [];
+    let currentIndex = 0;
+    let score = 0;
+    let answered = false;
+
+    const progressEl = document.getElementById("progress");
+    const questionLabelEl = document.getElementById("question-label");
+    const questionWordEl = document.getElementById("question-word");
+    const optionsEl = document.getElementById("options");
+    const resultMessageEl = document.getElementById("result-message");
+    const nextBtn = document.getElementById("next-btn");
+    const quizBox = document.getElementById("quiz-box");
+    const finalBox = document.getElementById("final-box");
+    const finalScoreEl = document.getElementById("final-score");
+
+    async function loadQuestions() {
+      try {
+        const res = await fetch("/api/test");
+        const data = await res.json();
+
+        questions = data.questions || [];
+
+        if (questions.length === 0) {
+          quizBox.innerHTML = `
+            <p>출제할 수 있는 문제가 없습니다.</p>
+            <a href="/" class="menu-btn">처음으로</a>
+          `;
+          return;
+        }
+
+        renderQuestion();
+      } catch (error) {
+        quizBox.innerHTML = `
+          <p>문제를 불러오지 못했습니다.</p>
+          <a href="/" class="menu-btn">처음으로</a>
+        `;
+        console.error(error);
+      }
+    }
+
+    function renderQuestion() {
+      answered = false;
+      resultMessageEl.textContent = "";
+      nextBtn.style.display = "none";
+      optionsEl.innerHTML = "";
+
+      const q = questions[currentIndex];
+
+      progressEl.textContent = `${currentIndex + 1} / ${questions.length}`;
+      questionLabelEl.textContent = `다음 단어의 ${q.answer_label}를 고르세요.`;
+      questionWordEl.textContent = q.question;
+
+      q.options.forEach(option => {
+        const btn = document.createElement("button");
+        btn.className = "option-btn";
+        btn.textContent = option;
+        btn.onclick = () => checkAnswer(btn, option, q.answer);
+        optionsEl.appendChild(btn);
+      });
+    }
+
+    function checkAnswer(button, selected, answer) {
+      if (answered) return;
+
+      answered = true;
+
+      const buttons = document.querySelectorAll(".option-btn");
+
+      buttons.forEach(btn => {
+        btn.disabled = true;
+
+        if (btn.textContent === answer) {
+          btn.classList.add("correct");
+        }
+      });
+
+      if (selected === answer) {
+        score++;
+        resultMessageEl.textContent = "정답!";
+        button.classList.add("correct");
+      } else {
+        resultMessageEl.textContent = `오답! 정답은 "${answer}"`;
+        button.classList.add("wrong");
+      }
+
+      nextBtn.style.display = "inline-block";
+    }
+
+    function nextQuestion() {
+      currentIndex++;
+
+      if (currentIndex >= questions.length) {
+        showFinalResult();
+      } else {
+        renderQuestion();
+      }
+    }
+
+    function showFinalResult() {
+      quizBox.style.display = "none";
+      finalBox.style.display = "block";
+      finalScoreEl.textContent = `${questions.length}문제 중 ${score}문제 정답`;
+    }
+
+    loadQuestions();
+  </script>
+</body>
+</html>
